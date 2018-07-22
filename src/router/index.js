@@ -10,6 +10,7 @@ const phone_contact = r => require.ensure([], () => r(require('@/page_biz/phone_
 const managerrecommend_template = r => require.ensure([], () => r(require('@/page_biz/managerrecommend_template')), 'managerrecommend_template');
 const managerrecommend_template_list = r => require.ensure([], () => r(require('@/page_biz/managerrecommend_template_list')), 'managerrecommend_template_list');
 const managerrecommend_user = r => require.ensure([], () => r(require('@/page_biz/managerrecommend_user')), 'managerrecommend_user');
+const managerrecommend_commission = r => require.ensure([], () => r(require('@/page_biz/managerrecommend_commission')), 'managerrecommend_commission');
 
 
 const routes = [
@@ -46,6 +47,11 @@ const routes = [
 				path: '/managerrecommend_user',
 				component: managerrecommend_user,
 				meta: ['店长的推荐', '用户管理'],
+			},
+			{
+				path: '/managerrecommend_commission',
+				component: managerrecommend_commission,
+				meta: ['店长的推荐', '财务'],
 			}
 
 		]

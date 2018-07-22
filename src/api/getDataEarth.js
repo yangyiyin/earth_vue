@@ -28,3 +28,6 @@ export const managerrecommend_user_info = data => fetch('/managerrecommend/user/
 export const managerrecommend_user_verify = data => fetch('/managerrecommend/user/verify', data, 'POST').then(check_login);
 export const managerrecommend_user_del = data => fetch('/managerrecommend/user/del', data, 'POST').then(check_login);
 export const managerrecommend_vip_extend = data => fetch('/managerrecommend/user/vip_extend', data, 'POST').then(check_login);
+export const managerrecommend_account_list = data => fetch('/managerrecommend/account/index', data, 'POST').then(check_login);
+export const managerrecommend_account_cash_out = data => fetch('/managerrecommend/account/cash_out', data, 'POST').then(check_login);
+
