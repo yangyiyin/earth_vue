@@ -11,11 +11,12 @@
 					</el-submenu>
 
 					<el-submenu index="3">
-						<template slot="title"><i class="el-icon-goods"></i>店长的推荐</template>
+						<template slot="title"><i class="el-icon-goods"></i>神奇店长</template>
 
 						<el-menu-item index="managerrecommend_template_list">模板列表</el-menu-item>
 						<el-menu-item index="managerrecommend_template">制作模板</el-menu-item>
 						<el-menu-item index="managerrecommend_user">用户管理</el-menu-item>
+						<el-menu-item index="managerrecommend_pay_money">商家打款</el-menu-item>
 					</el-submenu>
 
 				</el-menu>
