@@ -64,6 +64,13 @@
 
                     <div class="search_item">
                         <template>
+                            <el-checkbox v-model="tmp_data.has_stock">是否有库存</el-checkbox>
+                        </template>
+
+                    </div>
+
+                    <div class="search_item">
+                        <template>
                             <el-checkbox v-model="tmp_data.can_add_extra_img">是否可增加图片</el-checkbox>
                         </template>
 
@@ -233,7 +240,8 @@
                 loading:false,
                 id:0,
                 activeName: 'first',
-                blocks:[{id:6,name:'拼团'},{id:2,name:'砍价'},{id:1,name:'限时特惠'},{id:7,name:'预约报名'},{id:3,name:'集赞'},{id:4,name:'投票'},{id:5,name:'图文'}],
+//                blocks:[{id:6,name:'拼团'},{id:2,name:'砍价'},{id:1,name:'限时特惠'},{id:7,name:'预约报名'},{id:3,name:'集赞'},{id:4,name:'投票'},{id:5,name:'图文'}],
+                blocks:[{id:2,name:'砍价'},{id:1,name:'限时特惠'},{id:7,name:'预约报名'},{id:3,name:'集赞'},{id:4,name:'投票'},{id:5,name:'图文'}],
                 type:1,
                 title:'',
                 img:'',
@@ -244,6 +252,7 @@
                     time_limit_left:0,
                     add_extra_img_max:2,
                     add_extra_text_max:2,
+                    has_stock:true,
                     can_add_extra_img:false,
                     can_add_extra_text:false,
                     page:[{ type:'text',
@@ -292,6 +301,7 @@
                     bg:{src:''},
                     music:{},
                     time_limit_left:0,
+                    has_stock:true,
                     add_extra_img_max:2,
                     add_extra_text_max:2,
                     can_add_extra_img:false,
