@@ -12,8 +12,8 @@ module.exports = {
     app: './src/main.js'
   },
   externals:{
-    'vue':'vue',
-    'element-ui':'element-ui'
+    'vue':'Vue',
+    'element-ui':'ELEMENT'
   },
   output: {
     path: config.build.assetsRoot,
