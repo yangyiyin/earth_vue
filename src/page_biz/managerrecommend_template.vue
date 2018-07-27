@@ -41,7 +41,7 @@
                     <el-upload
 
                             class="avatar-uploader"
-                            action="http://88plus.net/public/index.php/ADMINAPI/img/upload"
+                            action="http://yixsu.com/public/index.php/ADMINAPI/img/upload"
                             :show-file-list="false"
                             :on-success="handleAvatarSuccess"
                             :before-upload="beforeAvatarUpload">
@@ -54,7 +54,7 @@
                     <el-upload
 
                             class="avatar-uploader"
-                            action="http://88plus.net/public/index.php/ADMINAPI/img/upload"
+                            action="http://yixsu.com/public/index.php/ADMINAPI/img/upload"
                             :show-file-list="false"
                             :on-success="handleAvatarSuccess2"
                             :before-upload="beforeAvatarUpload">
@@ -184,7 +184,7 @@
                             <el-upload
 
                                     class="avatar-uploader"
-                                    action="http://88plus.net/public/index.php/ADMINAPI/img/upload"
+                                    action="http://yixsu.com/public/index.php/ADMINAPI/img/upload"
                                     :show-file-list="false"
                                     :on-success="(res,file)=>{return handleAvatarSuccess3(res,file, index)}"
                                     :before-upload="beforeAvatarUpload">
@@ -220,7 +220,7 @@
 
         <div style="position: fixed;top: 150px;right: 75px;">
             <img style="position: absolute;width: 555px;right:-120px;top: -74px;z-index: -1" src="http://paz3jxo1v.bkt.clouddn.com/phone.png"/>
-            <iframe ref="iframe" class="embed-responsive-item" style="width: 298px;height:524px;" src="http://www.myweb.com/git-res/shop-y/index.php/HomeManagerRecommend/Pages/index?is_preview=1"></iframe>
+            <iframe ref="iframe" class="embed-responsive-item" style="width: 298px;height:524px;" src=""></iframe>
             <br/>
             <el-button type="warning" style="color: #fff;text-align:center;width: 300px;margin-top: 80px" v-on:click="get_data" >刷新预览</el-button>
         </div>
@@ -367,7 +367,7 @@
                 managerrecommend_cache_data({tmp_data:this.tmp_data}).then(function (response) {
 
                     if (response.success) {
-                        this.$refs.iframe.src='https://www.88plus.net/public/index.php/HomeManagerRecommend/Pages/index?is_preview=1';
+                        this.$refs.iframe.src='http://yixsu.com/public/index.php/HomeManagerRecommend/Pages/index?is_preview=1';
                     } else {
                         alert('上传失败!')
                     }
