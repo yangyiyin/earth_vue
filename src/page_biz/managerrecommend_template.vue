@@ -25,6 +25,13 @@
                     </div>
 
                     <div class="search_item">
+                        <el-input  placeholder="请输入描述" v-model="tmp_data.desc" type="textarea" :rows="2" style="width: 250px" >
+                            <template slot="prepend">描述</template>
+                        </el-input>
+
+                    </div>
+
+                    <div class="search_item">
                         <el-input clearable placeholder="页面总高度" v-model="tmp_data.height" style="width: 250px">
                             <template slot="prepend">页面总高度</template>
                         </el-input>
@@ -194,6 +201,19 @@
 
                         </div>
 
+                        <div v-if="item.type == 'img' " class="search_item">
+                            <el-input clearable placeholder="宽度" v-model="item.width" style="width: 250px">
+                                <template slot="prepend">宽度</template>
+                            </el-input>
+                        </div>
+
+                        <div v-if="item.type == 'img' " class="search_item">
+                            <el-input clearable placeholder="高度" v-model="item.height" style="width: 250px">
+                                <template slot="prepend">高度</template>
+                            </el-input>
+                        </div>
+
+
                         <div class="search_item">
                             <template>
                                 <el-checkbox v-model="item.is_available">是否可用</el-checkbox>
@@ -247,6 +267,7 @@
                 img:'',
                 tmp_data:{
                     height:'1000rpx',
+                    desc:'',
                     bg:{src:''},
                     music:{},
                     time_limit_left:0,
@@ -298,6 +319,7 @@
                 this.img = '';
                 this.tmp_data = {
                     height:'1000rpx',
+                    desc:'',
                     bg:{src:''},
                     music:{},
                     time_limit_left:0,
