@@ -261,7 +261,7 @@
                 id:0,
                 activeName: 'first',
 //                blocks:[{id:6,name:'拼团'},{id:2,name:'砍价'},{id:1,name:'限时特惠'},{id:7,name:'预约报名'},{id:3,name:'集赞'},{id:4,name:'投票'},{id:5,name:'图文'}],
-                blocks:[{id:2,name:'砍价'},{id:1,name:'限时特惠'},{id:7,name:'预约报名'},{id:3,name:'集赞'},{id:4,name:'投票'},{id:5,name:'图文'}],
+                blocks:[{id:2,name:'砍价'},{id:7,name:'预约报名'},{id:3,name:'集赞'},{id:4,name:'投票'},{id:5,name:'图文'}],
                 type:1,
                 title:'',
                 img:'',
@@ -283,7 +283,8 @@
                         can_del_block:false,
                         style:''}]
                 },
-                types:['text','img','sign','quick_buy','timelimit','cutprice_btn','cutprice_price','praise','vote','fight_group']
+//                types:['text','img','sign','quick_buy','timelimit','cutprice_btn','cutprice_price','praise','vote','fight_group']
+                types:['text','img','sign','timelimit','cutprice_btn','cutprice_price','praise','vote','fight_group']
 
             }
 
