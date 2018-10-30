@@ -199,17 +199,22 @@
                             </div>
 
                             <div v-if="item.type == 'cutprice_price' " class="search_item">
-                                <el-input clearable placeholder="原价(元)" v-model="item.cutprice_price" style="width: 250px">
+                                <el-input clearable placeholder="原价(元)" v-model="item.cutprice_price" style="width: 250px" @blur="item.cutprice_max_minus_price = item.cutprice_price - item.cutprice_min_price">
                                     <template slot="prepend">原价(元)</template>
                                 </el-input>
                             </div>
+                            <!--<div v-if="item.type == 'cutprice_price' " class="search_item">-->
+                                <!--<el-input clearable placeholder="最大优惠金额(元)" v-model="item.cutprice_max_minus_price" style="width: 250px">-->
+                                    <!--<template slot="prepend">底价(元)</template>-->
+                                <!--</el-input>-->
+
+                            <!--</div>-->
                             <div v-if="item.type == 'cutprice_price' " class="search_item">
-                                <el-input clearable placeholder="最大优惠金额(元)" v-model="item.cutprice_max_minus_price" style="width: 250px">
-                                    <template slot="prepend">最大优惠金额(元)</template>
+                                <el-input clearable placeholder="最大优惠金额(元)" v-model="item.cutprice_min_price" @blur="item.cutprice_max_minus_price = item.cutprice_price - item.cutprice_min_price" style="width: 250px">
+                                    <template slot="prepend">底价(元)</template>
                                 </el-input>
 
                             </div>
-
                             <div v-if="item.type == 'cutprice_price' " class="search_item">
                                 <el-input clearable placeholder="平均每次可砍价(元)" v-model="item.cutprice_average_price" style="width: 250px">
                                     <template slot="prepend">平均每次可砍价(元)</template>
