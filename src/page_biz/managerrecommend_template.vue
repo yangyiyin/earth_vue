@@ -26,7 +26,7 @@
 
                     <div class="search_item">
                         <el-input  placeholder="请输入描述" v-model="tmp_data.desc" type="textarea" :rows="2" style="width: 250px" >
-                            <template slot="prepend">描述</template>
+
                         </el-input>
 
                     </div>
@@ -101,149 +101,193 @@
                             <template slot="prepend">最多可增加文本数</template>
                         </el-input>
                     </div>
+
+                    <div style="margin-top: 20px;">
+                        框架json:
+                        <el-input @blur="gen_boxes_data()" placeholder="框架json" v-model="tmp_data.boxes_str" type="textarea" :rows="10" >
+
+                        </el-input>
+
+                    </div>
+
+                    <!--<div class="search_item">-->
+                        <!--<template>-->
+                            <!--<el-checkbox v-model="tmp_data.code_mode">下一步:code形式编辑</el-checkbox>-->
+                        <!--</template>-->
+
+                    <!--</div>-->
+
                     <el-button type="success" style="width: 500px;margin-top:10px;margin-bottom: 10px" v-on:click="activeName='second'" >下一步</el-button>
                 </el-tab-pane>
                 <el-tab-pane label="元素配置" name="second">
 
+                    <!--<template v-if="!tmp_data.code_mode">-->
+                        <div style="border: 1px dashed #c0a16b;width: 480px;padding: 10px;position: relative;margin-top: 5px;" v-for="(item, index)  in tmp_data.page">
+                            <el-button v-on:click="del_page_item(index)" type="info" icon="el-icon-close" circle size="mini" style="position: absolute;right: 0;top: 0;"></el-button>
 
-                    <div style="border: 1px dashed #c0a16b;width: 480px;padding: 10px;position: relative;margin-top: 5px;" v-for="(item, index)  in tmp_data.page">
-                        <el-button v-on:click="del_page_item(index)" type="info" icon="el-icon-close" circle size="mini" style="position: absolute;right: 0;top: 0;"></el-button>
-                        <template class="search_item">
-                            <el-select v-model="item.type" placeholder="类型">
-                                <el-option
-                                        v-for="item in types"
-                                        :key="item"
-                                        :label="item"
-                                        :value="item">
-                                </el-option>
-                            </el-select>
-                        </template>
+                            <template class="search_item">
+                                <el-select v-model="item.belong_box" value-key="name" placeholder="所属框架">
+                                    <el-option
+                                            v-for="item in boxes_options"
+                                            :key="item.name"
+                                            :label="item.name"
+                                            :value="item">
+                                    </el-option>
+                                </el-select>
 
-                        <div v-if="item.type == 'text' || item.type == 'sign'" class="search_item">
-                            <el-input  placeholder="文本内容" v-model="item.text" type="textarea" :rows="2" >
+                            </template>
+                            <br/>
+                            <br/>
 
-                            </el-input>
-                        </div>
-
-                        <div class="search_item">
-                            <el-input  placeholder="样式style" v-model="item.style" type="textarea" :rows="2" >
-
-                            </el-input>
-
-                        </div>
-
-                        <div v-if="item.type == 'vote' " class="search_item">
-                            <el-select v-model="item.style_type" placeholder="默认样式">
-                                <el-option
-                                        v-for="item in [{key:0,value:'默认样式'},{key:1,value:'样式1'}]"
-                                        :key="item.key"
-                                        :label="item.value"
-                                        :value="item.key">
-                                </el-option>
-                            </el-select>
-                        </div>
-
-                        <div v-if="item.type == 'vote' " class="search_item">
-                            <el-input clearable placeholder="数量" v-model="item.vote_num" style="width: 250px">
-                                <template slot="prepend">数量</template>
-                            </el-input>
-                        </div>
-
-                        <div v-if="item.type == 'fight_group' " class="search_item">
-                            <el-input clearable placeholder="价格(元)" v-model="item.fight_group_price" style="width: 250px">
-                                <template slot="prepend">价格(元)</template>
-                            </el-input>
-                        </div>
-
-                        <div v-if="item.type == 'quick_buy' " class="search_item">
-                            <el-input clearable placeholder="价格(元)" v-model="item.quick_buy_price" style="width: 250px">
-                                <template slot="prepend">价格(元)</template>
-                            </el-input>
-                        </div>
-
-                        <div v-if="item.type == 'fight_group' " class="search_item">
-                            <el-input clearable placeholder="成团人数" v-model="item.fight_group_number" style="width: 250px">
-                                <template slot="prepend">成团人数</template>
-                            </el-input>
-                        </div>
-
-                        <div v-if="item.type == 'cutprice_price' " class="search_item">
-                            <el-input clearable placeholder="原价(元)" v-model="item.cutprice_price" style="width: 250px">
-                                <template slot="prepend">原价(元)</template>
-                            </el-input>
-                        </div>
-                        <div v-if="item.type == 'cutprice_price' " class="search_item">
-                            <el-input clearable placeholder="最大优惠金额(元)" v-model="item.cutprice_max_minus_price" style="width: 250px">
-                                <template slot="prepend">最大优惠金额(元)</template>
-                            </el-input>
-
-                        </div>
-
-                        <div v-if="item.type == 'cutprice_price' " class="search_item">
-                            <el-input clearable placeholder="平均每次可砍价(元)" v-model="item.cutprice_average_price" style="width: 250px">
-                                <template slot="prepend">平均每次可砍价(元)</template>
-                            </el-input>
-                        </div>
-
-
-                        <div v-if="item.type == 'img'" class="search_item">
-                            <p style="font-size: 12px">上传图片:</p>
-                            <el-upload
-
-                                    class="avatar-uploader"
-                                    action="http://yixsu.com/public/index.php/ADMINAPI/img/upload"
-                                    :show-file-list="false"
-                                    :on-success="(res,file)=>{return handleAvatarSuccess3(res,file, index)}"
-                                    :before-upload="beforeAvatarUpload">
-                                <img v-if="item.src" :src="item.src" class="avatar">
-                                <i v-else class="el-icon-plus avatar-uploader-icon"></i>
-                            </el-upload>
-
-                        </div>
-
-                        <div v-if="item.type == 'img' " class="search_item">
-                            <el-input clearable placeholder="宽度" v-model="item.width" style="width: 250px">
-                                <template slot="prepend">宽度</template>
-                            </el-input>
-                        </div>
-
-                        <div v-if="item.type == 'img' " class="search_item">
-                            <el-input clearable placeholder="高度" v-model="item.height" style="width: 250px">
-                                <template slot="prepend">高度</template>
-                            </el-input>
-                        </div>
-
-
-                        <div class="search_item">
-                            <template>
-                                <el-checkbox v-model="item.is_available">是否可用</el-checkbox>
+                            <template class="search_item">
+                                <el-select v-model="item.type" placeholder="类型">
+                                    <el-option
+                                            v-for="item in types"
+                                            :key="item"
+                                            :label="item"
+                                            :value="item">
+                                    </el-option>
+                                </el-select>
                             </template>
 
+                            <div v-if="item.type == 'text' || item.type == 'sign'" class="search_item">
+                                <el-input  placeholder="文本内容" v-model="item.text" type="textarea" :rows="2" >
+
+                                </el-input>
+                            </div>
+
+                            <div class="search_item">
+                                <el-input  placeholder="样式style" v-model="item.style" type="textarea" :rows="2" >
+
+                                </el-input>
+
+                            </div>
+
+                            <div v-if="item.type == 'vote' " class="search_item">
+                                <el-select v-model="item.style_type" placeholder="默认样式">
+                                    <el-option
+                                            v-for="item in [{key:0,value:'默认样式'},{key:1,value:'样式1'}]"
+                                            :key="item.key"
+                                            :label="item.value"
+                                            :value="item.key">
+                                    </el-option>
+                                </el-select>
+                            </div>
+
+                            <div v-if="item.type == 'vote' " class="search_item">
+                                <el-input clearable placeholder="数量" v-model="item.vote_num" style="width: 250px">
+                                    <template slot="prepend">数量</template>
+                                </el-input>
+                            </div>
+
+                            <div v-if="item.type == 'fight_group' " class="search_item">
+                                <el-input clearable placeholder="价格(元)" v-model="item.fight_group_price" style="width: 250px">
+                                    <template slot="prepend">价格(元)</template>
+                                </el-input>
+                            </div>
+
+                            <div v-if="item.type == 'quick_buy' " class="search_item">
+                                <el-input clearable placeholder="价格(元)" v-model="item.quick_buy_price" style="width: 250px">
+                                    <template slot="prepend">价格(元)</template>
+                                </el-input>
+                            </div>
+
+                            <div v-if="item.type == 'fight_group' " class="search_item">
+                                <el-input clearable placeholder="成团人数" v-model="item.fight_group_number" style="width: 250px">
+                                    <template slot="prepend">成团人数</template>
+                                </el-input>
+                            </div>
+
+                            <div v-if="item.type == 'cutprice_price' " class="search_item">
+                                <el-input clearable placeholder="原价(元)" v-model="item.cutprice_price" style="width: 250px">
+                                    <template slot="prepend">原价(元)</template>
+                                </el-input>
+                            </div>
+                            <div v-if="item.type == 'cutprice_price' " class="search_item">
+                                <el-input clearable placeholder="最大优惠金额(元)" v-model="item.cutprice_max_minus_price" style="width: 250px">
+                                    <template slot="prepend">最大优惠金额(元)</template>
+                                </el-input>
+
+                            </div>
+
+                            <div v-if="item.type == 'cutprice_price' " class="search_item">
+                                <el-input clearable placeholder="平均每次可砍价(元)" v-model="item.cutprice_average_price" style="width: 250px">
+                                    <template slot="prepend">平均每次可砍价(元)</template>
+                                </el-input>
+                            </div>
+
+
+                            <div v-if="item.type == 'img'" class="search_item">
+                                <p style="font-size: 12px">上传图片:</p>
+                                <el-upload
+
+                                        class="avatar-uploader"
+                                        action="http://yixsu.com/public/index.php/ADMINAPI/img/upload"
+                                        :show-file-list="false"
+                                        :on-success="(res,file)=>{return handleAvatarSuccess3(res,file, index)}"
+                                        :before-upload="beforeAvatarUpload">
+                                    <img v-if="item.src" :src="item.src" class="avatar">
+                                    <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+                                </el-upload>
+
+                            </div>
+
+                            <div v-if="item.type == 'img' " class="search_item">
+                                <el-input clearable placeholder="宽度" v-model="item.width" style="width: 250px">
+                                    <template slot="prepend">宽度</template>
+                                </el-input>
+                            </div>
+
+                            <div v-if="item.type == 'img' " class="search_item">
+                                <el-input clearable placeholder="高度" v-model="item.height" style="width: 250px">
+                                    <template slot="prepend">高度</template>
+                                </el-input>
+                            </div>
+
+
+                            <div class="search_item">
+                                <template>
+                                    <el-checkbox v-model="item.is_available">是否可用</el-checkbox>
+                                </template>
+
+                            </div>
+
+
+                            <div class="search_item">
+                                <template>
+                                    <el-checkbox v-model="item.can_del_block">能否删除</el-checkbox>
+                                </template>
+                            </div>
+
                         </div>
+                        <el-button style="width: 500px;margin-top: 10px;margin-bottom: 10px" v-on:click="add_page_item" >+</el-button>
+                        <br/>
+                        <el-button type="success" style="width: 500px;margin-bottom: 10px" v-on:click="submit" :loading="loading">保存</el-button>
 
+                    <!--</template>-->
+                    <!--<template v-if="tmp_data.code_mode">-->
 
-                        <div class="search_item">
-                            <template>
-                                <el-checkbox v-model="item.can_del_block">能否删除</el-checkbox>
-                            </template>
-                        </div>
+                        <!--<div >-->
+                            <!--<el-input  placeholder="编辑代码" v-model="tmp_data.code_content" type="textarea" :rows="10" >-->
 
-                    </div>
-                    <el-button style="width: 500px;margin-top: 10px;margin-bottom: 10px" v-on:click="add_page_item" >+</el-button>
-                    <br/>
-                    <el-button type="success" style="width: 500px;margin-bottom: 10px" v-on:click="submit" :loading="loading">保存</el-button>
+                            <!--</el-input>-->
+                            <!--<br/>-->
+                            <!--<br/>-->
+                            <!--<el-button type="success" style="width: 500px;margin-bottom: 10px" v-on:click="submit" :loading="loading">保存</el-button>-->
 
-                </el-tab-pane>
+                        <!--</div>-->
+                    <!--</template>-->
+                     </el-tab-pane>
             </el-tabs>
         </template>
 
 
-        <div style="position: fixed;top: 150px;right: 75px;">
-            <img style="position: absolute;width: 555px;right:-120px;top: -74px;z-index: -1" src="http://paz3jxo1v.bkt.clouddn.com/phone.png"/>
-            <iframe ref="iframe" class="embed-responsive-item" style="width: 298px;height:524px;" src=""></iframe>
-            <br/>
-            <el-button type="warning" style="color: #fff;text-align:center;width: 300px;margin-top: 80px" v-on:click="get_data" >刷新预览</el-button>
-        </div>
+        <!--<div style="position: fixed;top: 150px;right: 75px;">-->
+            <!--<img style="position: absolute;width: 555px;right:-120px;top: -74px;z-index: -1" src="http://paz3jxo1v.bkt.clouddn.com/phone.png"/>-->
+            <!--<iframe ref="iframe" class="embed-responsive-item" style="width: 298px;height:524px;" src=""></iframe>-->
+            <!--<br/>-->
+            <!--<el-button type="warning" style="color: #fff;text-align:center;width: 300px;margin-top: 80px" v-on:click="get_data" >刷新预览</el-button>-->
+        <!--</div>-->
 
 
 
@@ -262,14 +306,17 @@
                 activeName: 'first',
 //                blocks:[{id:6,name:'拼团'},{id:2,name:'砍价'},{id:1,name:'限时特惠'},{id:7,name:'预约报名'},{id:3,name:'集赞'},{id:4,name:'投票'},{id:5,name:'图文'}],
                 blocks:[{id:2,name:'砍价'},{id:7,name:'预约报名'},{id:3,name:'集赞'},{id:4,name:'投票'},{id:5,name:'图文'}],
-                type:1,
+                type:2,
                 title:'',
                 img:'',
+                boxes_options:[],
                 tmp_data:{
-                    height:'1000rpx',
+                    height:'100rpx',
                     desc:'',
                     bg:{src:''},
                     music:{},
+                    boxes:[],
+                    boxes_str:'[{"style":""}]',
                     time_limit_left:0,
                     add_extra_img_max:2,
                     add_extra_text_max:2,
@@ -284,7 +331,7 @@
                         style:''}]
                 },
 //                types:['text','img','sign','quick_buy','timelimit','cutprice_btn','cutprice_price','praise','vote','fight_group']
-                types:['text','img','sign','timelimit','cutprice_btn','cutprice_price','praise','vote','fight_group']
+                types:['text','img','sign','timelimit','cutprice_btn','cutprice_price','praise','vote','fight_group', 'sell_num', 'left_num','share','tel']
 
             }
 
@@ -307,6 +354,7 @@
                     vm.get_tmp_info();
                 } else {
                     vm.init();
+                    vm.gen_boxes_data();
                 }
 
         })
@@ -314,15 +362,18 @@
 
         methods: {
             init() {
+                this.boxes_options = [];
                 this.activeName = 'first';
-                this.type = 1;
+                this.type = 2;
                 this.title = '';
                 this.img = '';
                 this.tmp_data = {
-                    height:'1000rpx',
+                    height:'100rpx',
                     desc:'',
                     bg:{src:''},
                     music:{},
+                    boxes:[],
+                    boxes_str:'[{"style":""}]',
                     time_limit_left:0,
                     has_stock:true,
                     add_extra_img_max:2,
@@ -346,6 +397,7 @@
                         this.title = res.data.title;
                         this.img = res.data.img;
                         this.tmp_data = res.data.tmp_data;
+                        this.gen_boxes_data();
                     }
                 }.bind(this));
             },
@@ -398,8 +450,37 @@
                 });
 
             },
-            submit: function () {
+            gen_boxes_data(){
+                if (this.tmp_data.boxes_str) {
+                    try{
+                        this.tmp_data.boxes = JSON.parse(this.tmp_data.boxes_str);
+                        var boxes_options = [];
+                        this.tmp_data.boxes.forEach(function(e){
+                            boxes_options.push({"name":e.name});
+                            if (e.children) {
+                                e.children.forEach(function(e1){
+                                    boxes_options.push({"name":'--'+e1.name});
+                                })
+                            }
+                        })
+                        this.boxes_options = boxes_options;
 
+                    } catch(e) {
+                        this.$message({
+                            type: 'warning',
+                            message: '框架json错误,请检查!'
+                        });
+                        this.tmp_data.boxes = [];
+                        this.boxes_options = [];
+                        return false;
+                    }
+                    return true;
+                }
+            },
+            submit: function () {
+                if (!this.gen_boxes_data()) {
+                    return;
+                }
                 this.$confirm('此操作将保存模板数据到商店, 是否继续?', '提示', {
                     confirmButtonText: '确定',
                     cancelButtonText: '取消',

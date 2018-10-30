@@ -34,10 +34,23 @@
                 </el-table-column>
                 <el-table-column label="操作">
                     <template slot-scope="scope">
+
                         <el-button size="mini" @click="goto_edit(scope.row.id)">编辑</el-button>
                         <el-button size="mini" v-if="scope.row.status == 1" @click="verify(scope, 0)" :loading="loadingBtn == scope.$index">下架</el-button>
                         <el-button size="mini" v-if="scope.row.status == 0" @click="verify(scope, 1)" :loading="loadingBtn == scope.$index">上架</el-button>
                         <el-button size="mini" @click="del(scope.row, scope.$index)">删除</el-button>
+
+                        <el-popover
+                                placement="bottom"
+                                title=""
+                                width="200"
+                                trigger="click"
+                                >
+                            <img :src="'http://api.yixsu.com/index.php/waibao/common/qrcode?text=https://api.yixsu.com/wechat_qrcode_linkrelation/tmp_make?id='+scope.row.id"/>
+                            <!--<img :src="'http://api.yixsu.com/index.php/waibao/common/qrcode?text=https://api.yixsu.com/wechat_qrcode_linkrelation/tmp_make?id=3'"/>-->
+                            <el-button size="mini" type="warning" slot="reference">获取二维码</el-button>
+                        </el-popover>
+
                     </template>
                 </el-table-column>
             </el-table>
